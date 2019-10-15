@@ -1,17 +1,17 @@
 #ifndef STACK_HPP
 #define STACK_HPP
 
-#include "Cell.h"
+#include "Cell.hpp"
 
 class Stack
 {
-Cell* head;
+Cell* root;
 
 public:
 	Stack();
 	~Stack();
-	int push(int)
-	void pop();
+	void push(int);
+	int pop();
 	int top();
 	bool isEmpty();
 	void print();

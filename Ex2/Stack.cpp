@@ -2,12 +2,12 @@
 
 Stack::Stack()
 {
-	this->head = null;
+	this->root = NULL;
 }
 
 Stack::~Stack()
 {
-	delete(this->head);
+	delete(this->root);
 }
 
 int Stack::pop()
@@ -18,21 +18,43 @@ int Stack::pop()
 	}
 	Cell *temp = this->root;
 	this->root = this->root->getNext();
-	delete(temp)
+	delete(temp);
 	return this->root->getElement();
 }
 
 void Stack::push(int element)
 {
-	
+	Cell* newCell = new Cell(element);
+	newCell->setNext(this->root);
+	this->root->setNext(newCell);
 }
 
 int Stack::top()
 {
-	return this->head->getElement();
+	return this->root->getElement();
 }
 
 bool Stack::isEmpty()
 {
-	return this->head->getNext() =! null;
+	return this->root->getNext() != NULL;
+}
+
+void Stack::print()
+{
+	Stack* temp = new Stack();
+	int popped;
+	while(!this->isEmpty())
+	{
+		popped = this->pop();
+		temp->push(popped);
+	}
+	
+	while(!temp->isEmpty())
+	{
+		popped = temp->pop();
+		std::cout << popped << std::endl;
+		this->push(popped);
+	}
+	
+	delete(temp);
 }
