@@ -7,42 +7,56 @@ Stack::Stack()
 
 Stack::~Stack()
 {
-	delete(this->root);
+	while(!this->isEmpty())
+	{
+		this->pop();
+	}
 }
 
 int Stack::pop()
 {
 	if(this->isEmpty())
 	{
-		//error
+		//cout << "There's nothing to pop, the stack is empty." << endl;
+		exit(1);
 	}
 	Cell *temp = this->root;
+	int popped = temp->getElement();
 	this->root = this->root->getNext();
 	delete(temp);
-	return this->root->getElement();
+	return popped;
 }
 
 void Stack::push(int element)
 {
 	Cell* newCell = new Cell(element);
-	newCell->setNext(this->root);
-	this->root->setNext(newCell);
+	if(!this->isEmpty())
+	{
+		newCell->setNext(this->root);
+	}
+	this->root = newCell;
 }
 
 int Stack::top()
 {
+	if(this->isEmpty())
+	{
+		//cout << "There's nothing to pop, the stack is empty." << endl;
+		exit(1);
+	}
 	return this->root->getElement();
 }
 
 bool Stack::isEmpty()
 {
-	return this->root->getNext() != NULL;
+	return this->root == NULL;
 }
 
 void Stack::print()
 {
 	Stack* temp = new Stack();
 	int popped;
+	
 	while(!this->isEmpty())
 	{
 		popped = this->pop();
