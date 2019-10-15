@@ -1,4 +1,4 @@
-todo:
+to do:
   main.cpp
   CoreLogic.cpp/.hpp
   
